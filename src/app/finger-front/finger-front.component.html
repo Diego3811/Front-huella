@@ -37,7 +37,18 @@
         </div>
         
         <div class="card-footer">
-            <button class="button button-primary" id="scan-button">Iniciar Escaneo</button>
+            
+            <button class="button button-primary" id="scan-button" (click)="capturarHuella()">Iniciar Escaneo</button>
+
+
+            <div *ngIf="fingerprintBase64" class="fingerprint-captured" >
+                <h3>Huella Capturada:</h3>
+                <textarea rows="10" cols="50" readonly>{{ fingerprintBase64 }}</textarea>
+            </div>
+            <div *ngIf="errorMensaje"  class="error-message" display="none">
+                <p>Error: {{ errorMensaje }}</p>
+            </div>
+              
             <button class="button button-outline" id="retry-button" style="display: none;">Escanear Otra Vez</button>
             <button class="button button-error" id="error-button" style="display: none;">Intentar Nuevamente</button>
         </div>

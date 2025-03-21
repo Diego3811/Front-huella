@@ -194,45 +194,143 @@ body {
 .card-footer {
     padding: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
     border-top: 1px solid #e2e8f0;
 }
 
 .button {
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 12px 24px;
+    border-radius: 8px;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
     border: none;
     outline: none;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-primary {
     background-color: #3b82f6;
     color: white;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
 }
 
 .button-primary:hover {
     background-color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.button-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(59, 130, 246, 0.2);
 }
 
 .button-outline {
     background-color: transparent;
     color: #3b82f6;
-    border: 1px solid #3b82f6;
+    border: 2px solid #3b82f6;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button-outline:hover {
-    background-color: rgba(59, 130, 246, 0.1);
+    background-color: rgba(59, 130, 246, 0.08);
+    border-color: #2563eb;
+    color: #2563eb;
 }
 
 .button-error {
     background-color: #ef4444;
     color: white;
+    position: relative;
+    overflow: hidden;
 }
 
 .button-error:hover {
     background-color: #dc2626;
+}
+
+.button-error::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+}
+
+.button-error:hover::after {
+    transform: scale(1);
+}
+
+
+.fingerprint-captured, .error-message {
+    animation: fadeIn 0.4s ease-out;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px 0;
+}
+
+.fingerprint-captured {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.fingerprint-captured textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    resize: none; 
+    font-family: monospace;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.error-message {
+    /* display: none; */
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: #dc2626;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.fingerprint-captured textarea {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    background: white;
+    border: 1px solid #cbd5e1;
+    margin-top: 10px;
+    padding: 12px;
 }

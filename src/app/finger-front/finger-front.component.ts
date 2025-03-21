@@ -32,3 +32,8 @@ export class FingerFrontComponent implements OnInit {
     );
   }
 }
+
+
+
+
+
