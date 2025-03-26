@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-finger-front',
-  templateUrl: '',
+  templateUrl:'./finger-front.component.html',
   styleUrls: ['./finger-front.component.css']
 })
+
+
 
   export class FingerFrontComponent implements OnInit {
     showFingerprintSection = false;
