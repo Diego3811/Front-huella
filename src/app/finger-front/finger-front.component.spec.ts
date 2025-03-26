@@ -17,6 +17,7 @@ describe('FingerFrontComponent', () => {
     fixture.detectChanges();
   });
 
+  
   it('should create', () => {
     expect(component).toBeTruthy();
   });

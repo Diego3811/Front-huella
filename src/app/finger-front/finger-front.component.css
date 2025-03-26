@@ -296,7 +296,7 @@ body {
     max-width: 100%;
     box-sizing: border-box;
     overflow-y: auto;
-    resize: none; 
+    resize: none;
     font-family: monospace;
     font-size: 0.8rem;
     padding: 10px;
@@ -325,7 +325,7 @@ body {
     }
 }
 
-
+/*!Base 64 captura */
 .fingerprint-captured textarea {
     font-family: 'Courier New', monospace;
     font-size: 0.8rem;
@@ -333,4 +333,27 @@ body {
     border: 1px solid #cbd5e1;
     margin-top: 10px;
     padding: 12px;
+}
+
+
+.fingerprint-captured {
+  transition: opacity 0.3s ease;
+}
+
+.fingerprint-captured textarea {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  background-color: #f8d7da;
 }

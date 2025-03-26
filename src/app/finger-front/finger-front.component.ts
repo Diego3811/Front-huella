@@ -1,5 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+
+import { Injectable } from "@angular/core";
+
+@Injectable({
+  providedIn: "root",
+})
+export class MessageService {
+  messages: string[] = [];
+
+  add(message: string) {
+    this.messages.push(message);
+  }
+
+  clear() {
+    this.messages = [];
+  }
+}
 
 @Component({
   selector: 'app-finger-front',
@@ -15,9 +32,9 @@ export class FingerFrontComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {} // No necesitamos nada en ngOnInit por ahora
+  ngOnInit() {}
 
-  capturarHuella() {
+ /*  capturarHuella() {
     this.http.get('http://localhost:5000/api/fingerprint/capture').subscribe(
       (response: any) => {
         this.fingerprintBase64 = response;
@@ -31,9 +48,6 @@ export class FingerFrontComponent implements OnInit {
       }
     );
   }
+} */
+
 }
-
-
-
-
-
