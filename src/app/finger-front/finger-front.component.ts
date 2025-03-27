@@ -205,3 +205,6 @@ scanButton.addEventListener('click', startScan);
 retryButton.addEventListener('click', resetReader);
 errorButton.addEventListener('click', resetReader);
 scanButton.addEventListener('click', () => capturarHuella()); 
+
+
+

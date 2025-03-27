@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="finger-front.component.css">
+
     <title>Lector de Huellas Digitales</title>
 
 </head>
@@ -46,7 +47,7 @@
                 <textarea rows="10" cols="50" readonly>{{ fingerprintBase64 }}</textarea>
             </div>
             <div *ngIf="errorMensaje"  class="error-message" display="none">
-                <p>Error: {{ errorMensaje }}</p>
+                <p >Error: {{ errorMensaje }}</p>
             </div>
 
             <button class="button button-outline" id="retry-button" style="display: none;">Escanear Otra Vez</button>
