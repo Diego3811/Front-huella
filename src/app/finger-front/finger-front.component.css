@@ -281,14 +281,17 @@ body {
     border-radius: 8px;
     padding: 16px;
     margin: 10px 0;
+    display: none;
+    
 }
+
 
 .fingerprint-captured {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     padding: 15px;
-    margin: 10px 0;
+    margin: 10px 0;    
 }
 
 .fingerprint-captured textarea {

@@ -50,6 +50,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="finger-front.component.css">
+   
 
     <title>Lector de Huellas Digitales</title>
 
@@ -87,7 +88,8 @@
 
         <div class="card-footer">
 
-            <button class="button button-primary" id="scan-button"> Iniciar Escaneo</button>
+            <button class="button button-primary" (click)="startScan()">Iniciar Escaneo</button>
+
 
 
             <div *ngIf="fingerprintBase64" class="fingerprint-captured" >
