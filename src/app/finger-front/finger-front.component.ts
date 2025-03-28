@@ -1,3 +1,5 @@
+
+/*
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { catchError } from 'rxjs/operators';
@@ -155,6 +157,7 @@ function clearUserInfo(): void {
   }, 300);
 }
 
+
 function startScan(): void {
   updateStatus('scanning', 'Escaneando huella digital...');
   
@@ -205,6 +208,188 @@ scanButton.addEventListener('click', startScan);
 retryButton.addEventListener('click', resetReader);
 errorButton.addEventListener('click', resetReader);
 scanButton.addEventListener('click', () => capturarHuella()); 
+*/
 
 
+//! CODIGO 2 Que tampoco sirve
+
+/*
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+interface User {
+  id: string;
+  name: string;
+  department: string;
+  accessLevel: string;
+  lastVerification: string;
+}
+
+@Component({
+  selector: 'app-finger-front',
+  templateUrl: './finger-front.component.html',
+  styleUrls: ['./finger-front.component.css']
+})
+export class FingerFrontComponent implements OnInit {
+  showFingerprintSection = false;
+  fingerprintBase64: string | null = null;
+  errorMensaje: string | null = null;
+  isScanning = false;
+
+  users: User[] = [
+    { id: "FP001", name: "Carlos Rodríguez", department: "Administración", accessLevel: "Nivel 3", lastVerification: "2023-05-15 09:23" },
+    { id: "FP002", name: "María González", department: "Recursos Humanos", accessLevel: "Nivel 2", lastVerification: "2023-05-14 14:45" },
+    { id: "FP003", name: "Juan Pérez", department: "Seguridad", accessLevel: "Nivel 5", lastVerification: "2023-05-15 08:10" }
+  ];
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() { }
+
+  capturarHuella(): void {
+    this.resetState();
+    this.showFingerprintSection = true;
+    this.isScanning = true;
+
+    this.http.get<string>('http://localhost:15000/api/fingerprint/capture')
+      .pipe(
+        catchError(error => this.handleError(error))
+      )
+      .subscribe({
+        next: (response) => {
+          this.fingerprintBase64 = response;
+          this.isScanning = false;
+        },
+        error: (error) => {
+          this.errorMensaje = error;
+          this.isScanning = false;
+        }
+      });
+  }
+
+  private resetState(): void {
+    this.fingerprintBase64 = null;
+    this.errorMensaje = null;
+    this.isScanning = false;
+  }
+
+  private handleError(error: any) {
+    let errorMessage = 'Error desconocido';
+
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else if (error.status) {
+      errorMessage = `Código ${error.status}: ${error.error?.message || error.statusText}`;
+    }
+
+    console.error(errorMessage, error);
+    return throwError(() => errorMessage);
+  }
+
+  resetReader(): void {
+    this.errorMensaje = null;
+    this.fingerprintBase64 = null;
+    this.isScanning = false;
+    this.showFingerprintSection = false;
+  }
+
+  startScan(): void {
+    this.isScanning = true;
+    setTimeout(() => {
+      const success = Math.random() > 0.3;
+      if (success) {
+        const randomUser = this.users[Math.floor(Math.random() * this.users.length)];
+        randomUser.lastVerification = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -3);
+        this.isScanning = false;
+      } else {
+        this.errorMensaje = 'Error al reconocer la huella. Intente nuevamente.';
+        this.isScanning = false;
+      }
+    }, 3000);
+  }
+}
+
+*/
+
+
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+interface User {
+  id: string;
+  name: string;
+  department: string;
+  accessLevel: string;
+  lastVerification: string;
+}
+
+@Component({
+  selector: 'app-finger-front',
+  templateUrl: './finger-front.component.html',
+  styleUrls: ['./finger-front.component.css']
+})
+export class FingerFrontComponent implements OnInit {
+  showFingerprintSection = false;
+  fingerprintBase64: string | null = null;
+  errorMensaje: string | null = null;
+  isScanning = false;
+  
+  users: User[] = [
+    { id: "FP001", name: "Carlos Rodríguez", department: "Administración", accessLevel: "Nivel 3", lastVerification: "2023-05-15 09:23" },
+    { id: "FP002", name: "María González", department: "Recursos Humanos", accessLevel: "Nivel 2", lastVerification: "2023-05-14 14:45" },
+    { id: "FP003", name: "Juan Pérez", department: "Seguridad", accessLevel: "Nivel 5", lastVerification: "2023-05-15 08:10" }
+  ];
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() { }
+
+  startScan(): void {
+    this.resetState();
+    this.showFingerprintSection = true;
+    this.isScanning = true;
+
+    console.log("Iniciando escaneo de huella...");
+
+    this.http.get<string>('http://localhost:15000/api/fingerprint/capture')
+      .pipe(
+        catchError(error => this.handleError(error))
+      )
+      .subscribe({
+        next: (response) => {
+          console.log("Huella capturada con éxito:", response);
+          this.fingerprintBase64 = response;
+          this.isScanning = false;
+        },
+        error: (error) => {
+          console.error("Error al capturar la huella:", error);
+          this.errorMensaje = error;
+          this.isScanning = false;
+        }
+      });
+  }
+
+  private resetState(): void {
+    this.fingerprintBase64 = null;
+    this.errorMensaje = null;
+    this.isScanning = false;
+  }
+
+  private handleError(error: any) {
+    let errorMessage = 'Error desconocido';
+
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else if (error.status) {
+      errorMessage = `Código ${error.status}: ${error.error?.message || error.statusText}`;
+    }
+
+    console.error(errorMessage, error);
+    return throwError(() => errorMessage);
+  }
+}
 
