@@ -3,9 +3,6 @@ import { FingerFrontComponent } from './finger-front/finger-front.component';
 
 export const routes: Routes = [
   { 
-    path: '',
-    component: FingerFrontComponent,
-    title: 'Lector de Huellas',  
-    pathMatch: 'full'            
+    path: 'lector',  component: FingerFrontComponent,
   }
 ];

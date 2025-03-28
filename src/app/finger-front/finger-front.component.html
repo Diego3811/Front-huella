@@ -1,4 +1,50 @@
-<!DOCTYPE html>
+<!-- <p>finger-front works!</p> -->
+
+
+ <div class="card">
+
+
+        <h3>Ahi te deje unas muestras de como funcionan los componentes</h3>
+
+        <h4>No borre nada, solo lo comente el codigo, para que lo acomodes</h4>
+
+        <div class="card-header">
+            <h2 class="card-title">Lector de Huellas Digitales</h2>
+            <p class="card-description">Sistema de verificación biométrica</p>
+        </div>
+
+        
+
+        <div class="card-footer">
+            
+            
+            <input type="text" id="fingerprintBase64" [(ngModel)]="textoDeMuestra"/>
+
+
+            <button class="button button-primary" id="scan-button" (click)="Demostracion()"> Iniciar Escaneo</button>
+
+
+            <textarea name="" id=""  [(ngModel)]="otraVariable"></textarea>
+
+            <div *ngIf="textoDeMuestra.length > 10">{{textoDeMuestra.toLocaleUpperCase()}}</div>
+
+
+            <div *ngIf="fingerprintBase64" class="fingerprint-captured" >
+                <h3>Huella Capturada:</h3>
+                <textarea rows="10" cols="50" readonly>{{ fingerprintBase64 }}</textarea>
+            </div>
+            <div *ngIf="errorMensaje"  class="error-message" display="none">
+                <p >Error: {{ errorMensaje }}</p>
+            </div> 
+
+            <button class="button button-outline" id="retry-button" style="display: none;">Escanear Otra Vez</button>
+            <button class="button button-error" id="error-button" style="display: none;">Intentar Nuevamente</button>
+        </div>
+    </div>
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +55,9 @@
 
 </head>
 <body>
-    <div class="card">
+
+    aqui es finger-front   -->
+    <!-- <div class="card">
         <div class="card-header">
             <h2 class="card-title">Lector de Huellas Digitales</h2>
             <p class="card-description">Sistema de verificación biométrica</p>
@@ -53,7 +101,7 @@
             <button class="button button-outline" id="retry-button" style="display: none;">Escanear Otra Vez</button>
             <button class="button button-error" id="error-button" style="display: none;">Intentar Nuevamente</button>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -215,8 +263,8 @@ scanButton1.addEventListener('click', capturarHuella());
 
 
 
-</body>
-</html>
+<!-- </body>
+</html> -->
 
 
 
