@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { catchError } from 'rxjs/operators';
+import { catchError, scan } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +29,7 @@ export class FingerFrontComponent {
   
   Demostracion(){
 
-    alert("Si jala el componente, lo que escribas en el input lo guardara en la variable textoDeMuestra y lo mostrara sin necesidad de afectar usar document.getElementById... " + this.textoDeMuestra);
+    alert("Si jala el componente, lo que escribas en el input lo guardara en la variable textoDeMuestra y lo mostrara sin necesidad de afectar usar document.getElementById.... " + this.textoDeMuestra);
 
   }
 
@@ -62,11 +62,43 @@ ngOnInit() {}
       });
   }
 
+  
+ /* 
+* Método para enviar la huella digital capturada al servidor
+*   verificarHuella() {
+*    if (!this.fingerprintBase64) {
+*      this.errorMensaje = 'No se ha capturado ninguna huella.';
+*      return;
+*    }
+*
+*    this.isScanning = true;
+*
+*    this.http.post('http://localhost:15000/api/fingerprint/verify', 
+* { fingerprint: this.fingerprintBase64 })
+*      .pipe(
+*        catchError(error => this.handleError(error))
+*      )
+*      .subscribe({
+*        next: (response) => {
+*          console.log('Huella verificada:', response);
+*          this.isScanning = false;
+*        },
+*        error: (error) => {
+*          this.errorMensaje = error;
+*          this.isScanning = false;
+*        }
+*      });
+*  } 
+* */
+
+  
+
   private resetState() {
     this.fingerprintBase64 = null;
     this.errorMensaje = null;
     this.isScanning = false;
   }
+
 
   private handleError(error: any) {
     let errorMessage = 'Unknown error: ' + error.message;
@@ -91,6 +123,8 @@ interface User {
   accessLevel: string;
   lastVerification: string;
 }
+
+
 
 const users: User[] = [
   {
@@ -122,6 +156,8 @@ const userInfo = document.getElementById('user-info') as HTMLElement;
 const scanButton = document.getElementById('scan-button') as HTMLButtonElement;
 const retryButton = document.getElementById('retry-button') as HTMLButtonElement;
 const errorButton = document.getElementById('error-button') as HTMLButtonElement;
+
+
 
 // Elementos de información del usuario
 const userName = document.getElementById('user-name') as HTMLElement;
@@ -167,6 +203,8 @@ function clearState(): void {
 function clearUserInfo(): void {
   userInfo.classList.remove('visible');
   
+
+  
   setTimeout(() => {
       const placeholder = '-';
       userName.textContent = placeholder;
@@ -176,6 +214,8 @@ function clearUserInfo(): void {
       userLastVerification.textContent = placeholder;
   }, 300);
 }
+
+
 
 function startScan(): void {
   updateStatus('scanning', 'Escaneando huella digital...');
@@ -200,6 +240,8 @@ function startScan(): void {
   }, 3000);
   
 }
+
+
 
 async function capturarHuella(): Promise<string> {
   const url = "http://localhost:15000/api/fingerprint/capture";
@@ -228,4 +270,7 @@ scanButton.addEventListener('click', startScan);
 retryButton.addEventListener('click', resetReader);
 errorButton.addEventListener('click', resetReader);
 scanButton.addEventListener('click', () => capturarHuella()); 
+
+retryButton.addEventListener('click', resetReader);
+errorButton.addEventListener('click', resetReader);
 

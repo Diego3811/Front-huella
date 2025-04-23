@@ -57,3 +57,71 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+# User Manual: Biometric Verification System
+
+## Introduction
+
+Welcome to the Fingerprint Biometric Verification System. This application allows you to scan, capture, and verify fingerprints quickly and securely.
+
+## System Requirements
+
+- Updated web browser (Chrome, Firefox, Edge)
+- Fingerprint reader connected to the system
+- API service running at http://localhost:15000
+
+## Instructions for Use
+
+### System Startup
+
+1. Open the application in your browser
+2. The main interface with a fingerprint icon will be displayed
+
+### Fingerprint Capture
+
+1. Place your finger on the fingerprint reader
+2. Click the "Start Scan" button
+3. Remain still while the scanning process completes
+4. The scanning animation will indicate that the process is in progress
+
+### Interpreting Results
+
+After scanning, the application will display one of the following states:
+
+- **Success**: If the fingerprint is recognized, you will see the corresponding user information
+- **Error**: If a problem occurs during scanning, an error message will be displayed
+
+### Data Displayed After Successful Verification
+
+- User name
+- User ID
+- Department
+- Access level
+- Last verification (date and time)
+
+### Additional Options
+
+- **Scan Again**: Allows you to perform a new scan after successful recognition
+- **Try Again**: Restarts the process after an error
+
+## Troubleshooting
+
+### The Application Does Not Detect the Fingerprint Reader
+
+- Verify that the reader is properly connected
+- Check that the API service is running at http://localhost:15000
+
+### Error During Scanning
+
+- Clean the reader surface
+- Make sure to place your finger correctly
+- Try again with another finger
+
+### Fingerprint Not Recognized
+
+- The user may not be registered in the system
+- The fingerprint quality may be insufficient
+
+## Technical Support
+
+If you encounter problems with the system, please contact the technical support department.
