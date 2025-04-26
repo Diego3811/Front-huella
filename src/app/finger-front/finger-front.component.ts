@@ -17,8 +17,15 @@ export class FingerFrontComponent {
   fingerprintBase64: string | null = null;
   errorMensaje: string | null = null;
   isScanning: boolean = false;
+  isFingerprintCaptured: boolean = false;
 
+  //? se inyecta el HttpClient para hacer peticiones HTTP
   constructor(private http: HttpClient) { }
+
+  //? se inicializa el componente
+  ngOnInit() {
+  }
+  //? se inicia el escaneo de la huella
 
   capturarHuella() {
     this.resetState();
@@ -32,19 +39,44 @@ export class FingerFrontComponent {
           this.fingerprintBase64 = response;
           this.isScanning = false;
         },
+        //? se detiene el escaneo y se asigna la huella a fingerprintBase64
+        complete: () => {
+          this.isScanning = false;
+        },
+
         error: (error) => {
           this.errorMensaje = error;
           this.isScanning = false;
         }
       });
   }
-
+//? se detiene el escaneo de la huella
   resetState() {
     this.fingerprintBase64 = null;
     this.errorMensaje = null;
     this.isScanning = false;
   }
+//? se envía la huella al servidor
+  enviarHuella() {
+    if (this.fingerprintBase64) {
+      this.http.post('http://localhost:15000/api/fingerprint/verify', { fingerprint: this.fingerprintBase64 })
+        .pipe(
+          catchError((error) => this.handleError(error))
+        )
+        .subscribe({
+          next: (response) => {
+            console.log('Respuesta del servidor:', response);
+          },
+          error: (error) => {
+            this.errorMensaje = error;
+          }
+        });
+    } else {
+      console.error('No hay huella para enviar');
+    }
+  }
 
+  //? se maneja el error
   private handleError(error: any) {
     let errorMessage = 'Error desconocido';
     
@@ -53,7 +85,7 @@ export class FingerFrontComponent {
     } else if (error.status) {
       errorMessage = `Error ${error.status}: ${error.error?.message || error.statusText}`;
     }
-    
+    //? se muestra el error en la consola
     console.error(errorMessage, error);
     return throwError(() => errorMessage);
   }
